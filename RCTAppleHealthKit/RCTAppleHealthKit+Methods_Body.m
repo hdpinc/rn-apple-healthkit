@@ -270,9 +270,15 @@
                            ascending:ascending
                                limit:limit
                           completion:^(NSArray *results, NSError *error) {
-                              if(results){
-                                  callback(@[[NSNull null], results]);
-                                  return;
+                            if(results){
+                                NSMutableArray* mutableResults = [NSMutableArray new];
+                                for (NSDictionary* result in results) {
+                                    NSMutableDictionary* mutableResult = [result mutableCopy];
+                                    mutableResult[@"value"] = @([mutableResult[@"value"] doubleValue] * 100);
+                                    [mutableResults addObject:mutableResult];
+                                }
+                                callback(@[[NSNull null], mutableResults]);
+                                return;
                               } else {
                                   NSLog(@"error getting body fat percentage samples: %@", error);
                                   callback(@[RCTMakeError(@"error getting body fat percentage samples", nil, nil)]);
