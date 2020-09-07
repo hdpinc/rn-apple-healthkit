@@ -34,7 +34,6 @@
         @"StepCount" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount],
         @"DistanceWalkingRunning" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning],
         @"DistanceCycling" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceCycling],
-        @"DistanceSwimming" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceSwimming],
         @"BasalEnergyBurned" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBasalEnergyBurned],
         @"ActiveEnergyBurned" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned],
         @"FlightsClimbed" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierFlightsClimbed],
@@ -52,8 +51,6 @@
         @"BloodGlucose" : [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierBloodGlucose],
         // Sleep
         @"SleepAnalysis" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierSleepAnalysis],
-        // Mindfulness
-        @"MindfulSession" : [HKObjectType categoryTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession],
         //workouts
         @"Workout" : [HKObjectType workoutType]
     }.mutableCopy;
@@ -62,6 +59,12 @@
     if (@available(iOS 11.0, *)) {
         [readPerms setObject:[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierRestingHeartRate] forKey:@"RestingHeartRate"];
     } 
+    //HKQuantityTypeIdentifierDistanceSwimming iOS10.0+
+    if (@available(iOS 10.0, *)) {
+        [readPerms setObject:[HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceSwimming] forKey:@"DistanceSwimming"];
+        // Mindfulness
+        [readPerms setObject:[HKObjectType quantityTypeForIdentifier:HKCategoryTypeIdentifierMindfulSession] forKey:@"MindfulSession"];
+    }
     return readPerms;
 }
 
